@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Rendy Hansome - Sistem Piket</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">RH</div>
+            <div>
+                <h2>PT Rendy</h2>
+                <span>HANSOME</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active">
+                <span>🏠</span> Dashboard
+            </a>
+
+            <a href="#jadwal" class="nav-link">
+                <span>📅</span> Jadwal Piket
+            </a>
+
+            <a href="#anggota" class="nav-link">
+                <span>👥</span> Anggota
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>© 2026 PT Rendy Hansome</p>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <button class="menu-btn" id="menuBtn">☰</button>
+
+            <div class="page-title">
+                <h1>Sistem Piket</h1>
+                <p>PT Rendy Hansome</p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">RH</div>
+                <div>
+                    <strong>Rendy</strong>
+                    <small>Administrator</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="section">
+
+            <div class="welcome">
+                <div>
+                    <span class="badge">SYSTEM ONLINE</span>
+                    <h2>Selamat Datang 👋</h2>
+                    <p>Kelola jadwal piket PT Rendy Hansome dengan mudah.</p>
+                </div>
+
+                <div class="clock">
+                    <span id="clock">00:00:00</span>
+                    <small id="date">Loading...</small>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">👥</div>
+                    <div>
+                        <span>Total Anggota</span>
+                        <h3 id="totalAnggota">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✅</div>
+                    <div>
+                        <span>Sudah Piket</span>
+                        <h3 id="sudahPiket">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">⏳</div>
+                    <div>
+                        <span>Belum Piket</span>
+                        <h3 id="belumPiket">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">📋</div>
+                    <div>
+                        <span>Total Jadwal</span>
+                        <h3 id="totalJadwal">0</h3>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- JADWAL -->
+        <section id="jadwal" class="section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Jadwal Piket</h2>
+                    <p>Daftar jadwal piket anggota</p>
+                </div>
+
+                <button class="primary-btn" id="openModal">
+                    + Tambah Jadwal
+                </button>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="toolbar">
+                <div class="search-box">
+                    🔍
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Cari nama atau hari..."
+                    >
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-container">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Hari</th>
+                            <th>Jam</th>
+                            <th>Tugas</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="jadwalTable">
+                    </tbody>
+                </table>
+
+                <div class="empty" id="emptyState">
+                    <div>📭</div>
+                    <h3>Belum ada jadwal</h3>
+                    <p>Tambahkan jadwal piket terlebih dahulu.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ANGGOTA -->
+        <section id="anggota" class="section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Anggota Piket</h2>
+                    <p>Daftar anggota PT Rendy Hansome</p>
+                </div>
+            </div>
+
+            <div class="member-grid" id="memberGrid">
+            </div>
+
+        </section>
+
+        <footer>
+            <p>PT Rendy Hansome • Sistem Manajemen Piket</p>
+        </footer>
+
+    </main>
+
+    <!-- MODAL -->
+    <div class="modal" id="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h2>Tambah Jadwal</h2>
+                    <p>Buat jadwal piket baru</p>
+                </div>
+
+                <button class="close-btn" id="closeModal">×</button>
+            </div>
+
+            <form id="jadwalForm">
+
+                <div class="form-group">
+                    <label>Nama Anggota</label>
+
+                    <input
+                        type="text"
+                        id="nama"
+                        placeholder="Masukkan nama"
+                        required
+                    >
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Hari</label>
+
+                        <select id="hari" required>
+                            <option value="">Pilih hari</option>
+                            <option>Senin</option>
+                            <option>Selasa</option>
+                            <option>Rabu</option>
+                            <option>Kamis</option>
+                            <option>Jumat</option>
+                            <option>Sabtu</option>
+                            <option>Minggu</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jam</label>
+
+                        <input
+                            type="time"
+                            id="jam"
+                            value="07:00"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Tugas</label>
+
+                    <select id="tugas" required>
+                        <option value="">Pilih tugas</option>
+                        <option>Bersih-bersih</option>
+                        <option>Merapikan Ruangan</option>
+                        <option>Menyapu</option>
+                        <option>Mengepel</option>
+                        <option>Menjaga Kantor</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" id="cancelModal">
+                        Batal
+                    </button>
+
+                    <button type="submit" class="primary-btn">
+                        Simpan Jadwal
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
